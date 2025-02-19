@@ -2,6 +2,7 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 function Register() {
   const {
@@ -12,21 +13,28 @@ function Register() {
   } = useForm();
 
   const [loading, setLoading] = useState(false); // Trạng thái gửi form
+  const navigate = useNavigate();
 
   async function onSubmit(data) {
     setLoading(true);
     try {
       await axios.post("http://localhost:3000/register", data);
       toast.success("Đăng ký thành công!");
+      setTimeout(() => {
+        navigate("/login")
+      }, 800)
     } catch (error) {
-      console.error("Đã có lỗi khi đăng ký:", error);
+      console.error("Đã có lỗi khi đăng ký:", error); // In lỗi chi tiết ra console để debug
       const errorMessage =
-        error.response?.data?.message || error.message || "Lỗi không xác định!";
+        error.response?.data?.message ||
+        error.message ||
+        "Lỗi không xác định!";
       toast.error(errorMessage);
     } finally {
       setLoading(false);
     }
   }
+  
 
   return (
     <div className="container">
