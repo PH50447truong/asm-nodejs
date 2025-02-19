@@ -32,17 +32,17 @@ function Homepage({ handleSearch, searchResults }) {
     fetchProducts(currentPage);
   }, [currentPage]);
 
-  // Chuyển đến trang trước
   function goToPreviousPage() {
-    if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
-    }
+    setCurrentPage((prev) => Math.max(prev - 1, 1));
   }
 
-  // Chuyển đến trang tiếp theo
   function goToNextPage() {
-    if (currentPage < totalPages) {
-      setCurrentPage(currentPage + 1);
+    setCurrentPage((prev) => Math.min(prev + 1, totalPages));
+  }
+
+  function goToPage(page) {
+    if (page >= 1 && page <= totalPages) {
+      setCurrentPage(page);
     }
   }
 
@@ -83,7 +83,7 @@ function Homepage({ handleSearch, searchResults }) {
         )}
       </div>
 
-      {/* Danh sách sản phẩm */}
+      {/* ListProduct */}
       <div className="container my-5" id="shop-now">
         <h2 className="text-center mb-4">Sản Phẩm Mới Nhất</h2>
         <div className="row">
@@ -115,25 +115,39 @@ function Homepage({ handleSearch, searchResults }) {
         </div>
 
         {/* Pagination Controls */}
-        <div className="pagination-controls text-center mt-4">
-          <button
-            className="btn btn-outline-primary mx-2"
-            onClick={goToPreviousPage}
-            disabled={currentPage === 1}
-          >
-            Pre
-          </button>
-          <span className="mx-2">
-            {currentPage} / {totalPages}
-          </span>
-          <button
-            className="btn btn-outline-primary mx-2"
-            onClick={goToNextPage}
-            disabled={currentPage === totalPages}
-          >
-            Next
-          </button>
-        </div>
+          {/* Pagination */}
+          {totalPages > 1 && (
+          <div className="pagination-controls text-center mt-4">
+            <button
+              className="btn btn-outline-primary mx-2"
+              onClick={goToPreviousPage}
+              disabled={currentPage === 1}
+            >
+              Trước
+            </button>
+
+            {[...Array(totalPages)].map((_, index) => {
+              const page = index + 1;
+              return (
+                <button
+                  key={page}
+                  className={`btn mx-1 ${currentPage === page ? "btn-primary" : "btn-outline-primary"}`}
+                  onClick={() => goToPage(page)}
+                >
+                  {page}
+                </button>
+              );
+            })}
+
+            <button
+              className="btn btn-outline-primary mx-2"
+              onClick={goToNextPage}
+              disabled={currentPage === totalPages}
+            >
+              Tiếp
+            </button>
+          </div>
+        )}
       </div>
 
       {/* Footer */}
@@ -159,3 +173,4 @@ function Homepage({ handleSearch, searchResults }) {
 }
 
 export default Homepage;
+
