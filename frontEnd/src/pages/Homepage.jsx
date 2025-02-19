@@ -114,7 +114,7 @@ function Homepage({ handleSearch, searchResults }) {
           )}
         </div>
 
-        {/* Pagination Controls */}
+        
           {/* Pagination */}
           {totalPages > 1 && (
           <div className="pagination-controls text-center mt-4">
