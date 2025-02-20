@@ -7,7 +7,7 @@ function Homepage({ handleSearch, searchResults }) {
   console.log("searchResults:", searchResults);
 
 
-  const [products, setProducts] = useState([]); //  sản phẩm
+
 
   const [products, setProducts] = useState([]); // List sản phẩm
 
