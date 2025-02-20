@@ -6,7 +6,11 @@ function Homepage({ handleSearch, searchResults }) {
   // console.log("handleSearch:", handleSearch); 
   console.log("searchResults:", searchResults);
 
+
   const [products, setProducts] = useState([]); //  sản phẩm
+
+  const [products, setProducts] = useState([]); // List sản phẩm
+
   const [currentPage, setCurrentPage] = useState(1); // Trang hiện tại
   const [totalPages, setTotalPages] = useState(1); // Tổng số trang
   // Hàm gọi API lấy danh sách sản phẩm
