@@ -173,15 +173,7 @@ function App() {
               <button
                 className="btn btn-outline-light"
                 type="submit"
-                style={{
-                  padding: "10px 20px",
-                  border: "2px solid #007bff",
-                  borderRadius: "8px",
-                  backgroundColor: "#007bff",
-                  color: "#fff",
-                  cursor: "pointer",
-                  transition: "all 0.3s ease",
-                }}
+                
                 onMouseEnter={(e) =>
                   (e.target.style.backgroundColor = "#0056b3")
                 }
